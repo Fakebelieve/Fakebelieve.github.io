@@ -4,21 +4,41 @@
 <head>
 	<style>
 		#pyramid {
+			line-height: 0;
+			font-size: 30px;
+		}
+
+		body {
 			font-family: "Courier New", monospace;
+			text-align: center;
 		}
 	</style>
 </head>
 
 <body>
-	<h1>Mario 2</h1>
-	<h3>
-		Behold this wonderful pyramid:
-	</h3>
+	<a href="index.html"> Home </a>
+	<h1>Mario 3</h1>
+
+	<br>
+
+	<p>When you say</p>
+
+  <p><strong>Draw a pyramid</strong></p>
+
+  <p>I say:</p>
+
+  <br>
+
+  <label>How high?</label>
+
 
 	<form onsubmit="return false;">
-		Height: <input type="number" name="height" id="height">
-  <button onclick="printPyramid()">Print</button>
+		<input type="text" name="height" id="height">
+		<br><br>
+  	<button onclick="printPyramid()">Draw a Pyramid</button>
 	</form>
+
+	<br><br>
 
 	<div id="pyramid">
 		<!-- Our pyramid will go inside here -->

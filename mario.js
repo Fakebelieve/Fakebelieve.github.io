@@ -10,8 +10,17 @@
  *      ######
  */
 
+//clear function
+function clear(id) {
+	let el = document.getElementById(id);
+	if (el) {
+		el.innerHTML = '';
+	}
+}
+
 //Function to pass user inputted height and build a mario pyramid
 function printPyramid() {
+	clear('pyramid');
 	let height = document.getElementById("height").value;
 	let output = "";
 	let rowstr = "";
@@ -30,7 +39,6 @@ function printPyramid() {
 		let pyra = document.createElement("p");
 		let mid = document.createTextNode(rowstr);
 		pyra.appendChild(mid);
-
 		let element = document.getElementById("pyramid");
 		element.appendChild(pyra);
 
