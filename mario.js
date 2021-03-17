@@ -10,6 +10,10 @@
  *      ######
  */
 
+//runs printPyramid when button is pressed
+const btn = document.getElementById('button');
+btn.addEventListener('click', printPyramid);
+
 //clear function
 function clear(id) {
 	let el = document.getElementById(id);
@@ -45,4 +49,4 @@ function printPyramid() {
 		rowstr = "";
 	}											//outer loop stops
 	console.log(output);	//print pyramid
-}  
+}
