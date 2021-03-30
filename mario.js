@@ -10,9 +10,16 @@
  *      ######
  */
 
-//runs printPyramid when button is pressed
-const btn = document.getElementById('button');
-btn.addEventListener('click', printPyramid);
+//runs printPyramid when slider is moved
+const slide = document.getElementById('height');
+slide.addEventListener('input', printPyramid);
+
+const blank = ".";
+
+//updates slider number
+function updateTextInput(val) {
+          document.getElementById('textInput').innerHTML=val; 
+        }
 
 //clear function
 function clear(id) {
@@ -30,12 +37,12 @@ function printPyramid() {
 	let rowstr = "";
 	for (let rows = 1; rows <= height; rows++) {								//outer loop starts
 		for (let space = height - 1; space >= rows; space--) {		//inner loop adds spaces
-			output += ".";
-			rowstr += ".";
+			output += blank;
+			rowstr += blank;
 		}
 		for (let brick = 0; brick <= rows; brick++) {					//inner loop adds bricks
-			output += "#";
-			rowstr += "#";
+			output += document.getElementById('bricked').value;
+			rowstr += document.getElementById('bricked').value;
 		}
 		output += "\n";		//start next layer
 
