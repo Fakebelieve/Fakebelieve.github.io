@@ -1,59 +1,104 @@
-/*
- * printPyramid
- *
- * Prints a pyramid of '#' characters of the specified height
- * For example, if height is 5, the console will look like this:
- *          ##
- *         ###
- *        ####
- *       #####
- *      ######
- */
 
-//runs printPyramid when slider is moved
-const slide = document.getElementById('height');
-slide.addEventListener('input', printPyramid);
 
-const blank = ".";
+var heightElem = document.getElementById("height");
+var formElem = document.getElementById("draw-form");
 
-//updates slider number
-function updateTextInput(val) {
-          document.getElementById('textInput').innerHTML=val; 
-        }
+// set a handler function for the form's submission event
+formElem.onsubmit = function (event) {
 
-//clear function
-function clear(id) {
-	let el = document.getElementById(id);
-	if (el) {
-		el.innerHTML = '';
+	event.preventDefault();
+
+	clearError();
+
+	// figure out the height the user typed
+	heightStr = heightElem.value;
+
+
+
+	// convert the string to an int
+	height = parseInt(heightStr);
+
+	// if they didn't type anything at all, give an error message
+	// something like "Please provide a height"
+	if (heightStr == "") {
+		displayError("Please provide a height");
+		return;
 	}
+	// if the height is not-a-number, yell at them and exit early
+	// negative numbers and zero should also be rejected here
+	else if (isNaN(height) || height <= 0) {
+		displayError("That's not a valid height.");
+		return;
+	}
+
+	// if the height is absurdly tall, yell at them and exit early
+	var tooTall = 100;
+	if (height > tooTall) {
+		displayError("Are you cray? I can't build a pyramid that tall.");
+		return;
+	}
+
+
+	// draw pyramid with the specified height
+	drawPyramid(height);
 }
 
-//Function to pass user inputted height and build a mario pyramid
-function printPyramid() {
-	clear('pyramid');
-	let height = document.getElementById("height").value;
-	let output = "";
-	let rowstr = "";
-	for (let rows = 1; rows <= height; rows++) {								//outer loop starts
-		for (let space = height - 1; space >= rows; space--) {		//inner loop adds spaces
-			output += blank;
-			rowstr += blank;
-		}
-		for (let brick = 0; brick <= rows; brick++) {					//inner loop adds bricks
-			output += document.getElementById('bricked').value;
-			rowstr += document.getElementById('bricked').value;
-		}
-		output += "\n";		//start next layer
 
-		//adds pyramid to pyramid div
-		let pyra = document.createElement("p");
-		let mid = document.createTextNode(rowstr);
-		pyra.appendChild(mid);
-		let element = document.getElementById("pyramid");
-		element.appendChild(pyra);
+/**
+ * displayError
+ *
+ * Displays an error message on the text input, and colors it red
+ */
+function displayError(message) {
+	heightElem.className = "invalid-field";
+	document.querySelector(".error-message").innerHTML = message;
+}
 
-		rowstr = "";
-	}											//outer loop stops
-	console.log(output);	//print pyramid
+
+/*
+ * clearError
+ *
+ * Undisplays the error message and removes the red CSS style
+ */
+function clearError() {
+	// TODO 3
+	// implement this function.
+	heightElem.className = "";
+	document.querySelector(".error-message").innerHTML = "";
+}
+
+
+
+/**
+ * drawPyramid
+ *
+ * Renders, in the HTML document, a Mario pyramid of the specified height
+ */
+function drawPyramid(height) {
+
+	// first, clear the old content
+	document.getElementById("pyramid").innerHTML = "";
+
+	// for each row....
+	for (var row = 0; row < height; row++) {
+
+		// figure out number of bricks and spaces
+		var numBricks = row + 2;
+		var numSpaces = height - row - 1;
+
+		// build up a string for this row
+		var rowStr = "";
+		for (var i = 0; i < numSpaces; i++) {
+			var spaceChar = "&nbsp"; // this is the HTML encoding for a space " "
+			rowStr += spaceChar;
+		}
+		for (var i = 0; i < numBricks; i++) {
+			rowStr += "#";
+		}
+
+		// make a <p> element for this row, and insert it into the #pyramid container
+		rowElem = document.createElement("p");
+		rowElem.innerHTML = rowStr;
+		document.getElementById("pyramid").appendChild(rowElem);
+	}
 }

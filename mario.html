@@ -1,85 +1,50 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<style>
-		#pyramid {
-			line-height: 0;
-			font-size: 30px;
-		}
+    <style>
+        #pyramid {
+            line-height: 0;
+            font-size: 30px;
+        }
 
-		body {
-			font-family: "Courier New", monospace;
-			text-align: center;
-			width: 80%;
-			height: 100%;
-			margin: auto;
-		}
+        body {
+            font-family: "Courier New", monospace;
+            text-align: center;
+        }
 
-		#innerbody {
-			background-color: #FFF0FA;
-			height: 100%;
-			padding-bottom: 100%;
-		}
+        .invalid-field {
+            border: 1px solid red;
+        }
 
-		#content {
-			width: 70%;
-			height: 70%;
-			border: 3px solid #993366;
-			margin: auto;
-			margin-top: 50px;
-			background-color:#D1D1D1;
-		}
-
-		#banner {
-			background-color: #993366;
-			color: #FFFFFF;
-			padding-top: 20px;
-			padding-bottom: 20px;
-		}
-
-		#innerbanner {
-			background-color:#BABABA;
-			padding-top: 10px;
-			padding-bottom: 10px;
-		}
-
-	</style>
+        .error-message {
+            color: red;
+        }
+    </style>
 </head>
-
-<header> <a href="index.html"> Home </a> </header>
-
 <body>
-	<div id="innerbody">
-		<div id="banner">
-			<h1>Pyramid Slide</h1>
-		</div>
+    <h1>Mario 4</h1>
 
+    <p>When you say</p>
+    <p><strong>Draw a pyramid</strong></p>
+    <p>I say:</p>
+    <br>
 
-	<div id="content">
-	<div id="innerbanner">
+    <form id="draw-form">
+        <label>
+            How high?
+            <input type="text" id="height"/>
+            <label class="error-message">
+                <!-- If there was a user error, we will put a message in here -->
+            </label>
+        </label>
+        <br><br>
+        <input type="submit" value="Draw a pyramid"/>
+    </form>
 
-	<label for="bricked">Brick Symbol: </label>
+    <br><br>
 
-	<select name="bricked" id="bricked" oninput="printPyramid();">
-  	<option value="#">#</option>
-  	<option value="@">@</option>
-  	<option value="X">X</option>
-  	<option value="$">$</option>
-	</select>
+    <div id="pyramid"></div>
 
-	<label>&nbsp;&nbsp;How high?</label>
-
-		<input type="range" name="height" id="height" min="1" max="10" oninput="updateTextInput(this.value);">
-		<b><span id="textInput"></span></b>
-		<br><br>
-	
-	</div>
-	<div id="pyramid">
-		<!-- Our pyramid will go inside here -->
-	</div>
-	</div>
-	<script src="mario.js"></script>
-	</div>
+    <script src="mario.js"></script>
 </body>
 </html>
